@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hai, Aku Mau Ngomong Sesuatu!</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                padding: 50px;
+                background-color: #fce4ec;
+            }
+            h1 {
+                color: #e91e63;
+            }
+            p {
+                font-size: 18px;
+            }
+            .btn {
+                background-color: #e91e63;
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 18px;
+                border: none;
+                cursor: pointer;
+                margin: 10px;
+            }
+            .btn:hover {
+                background-color: #c2185b;
+            }
+            #content {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <h1>Hai, Aku Punya Sesuatu Buat Kamu!</h1>
+            <p>Klik tombol di bawah ya :)</p>
+            <button class="btn" onclick="showConfess()">Klik di sini</button>
+        </div>
+
+        <div id="confess" style="display: none">
+            <h1> aku Suka Kamu ❤️</h1>
+            <p>Mau nggak jadi orang spesial buat aku?</p>
+            <button class="btn" onclick="showResult(true)">Ya</button>
+            <button class="btn" onclick="showResult(false)">Tidak</button>
+        </div>
+
+        <div id="yes" style="display: none">
+            <h1>YAY! ❤️</h1>
+            <p>Seneng banget! Terima kasih udah nerima aku!</p>
+        </div>
+
+        <div id="no" style="display: none">
+            <h1>:(</h1>
+            <p>
+                Gapapa kok, yang penting aku udah jujur! Semoga kita tetap bisa
+                berteman ya!
+            </p>
+        </div>
+
+        <script>
+            function showConfess() {
+                document.getElementById("content").style.display = "none";
+                document.getElementById("confess").style.display = "block";
+            }
+
+            function showResult(accepted) {
+                document.getElementById("confess").style.display = "none";
+                if (accepted) {
+                    document.getElementById("yes").style.display = "block";
+                } else {
+                    document.getElementById("no").style.display = "block";
+                }
+            }
+
+            // Tombol "Tidak" pindah posisi tiap mau disentuh
+            const noBtn = document.querySelector(
+                'button[onclick="showResult(false)"]'
+            );
+            noBtn.addEventListener("mouseover", () => {
+                const randX = Math.floor(
+                    Math.random() * (window.innerWidth - 100)
+                );
+                const randY = Math.floor(
+                    Math.random() * (window.innerHeight - 50)
+                );
+                noBtn.style.position = "absolute";
+                noBtn.style.left = `${randX}px`;
+                noBtn.style.top = `${randY}px`;
+            });
+        </script>
+    </body>
+</html>
