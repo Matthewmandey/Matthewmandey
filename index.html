@@ -3,95 +3,283 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Hai, Aku Mau Ngomong Sesuatu!</title>
+        <title>Portofolio | Nama Kamu</title>
         <style>
+            :root {
+                --bg-light: #f9f9f9;
+                --text-light: #111;
+                --bg-dark: #111;
+                --text-dark: #f9f9f9;
+                --accent: #007aff;
+
+                --transition: 0.4s ease;
+            }
+
             body {
-                font-family: Arial, sans-serif;
-                text-align: center;
-                padding: 50px;
-                background-color: #fce4ec;
+                margin: 0;
+                font-family: "Segoe UI", sans-serif;
+                background-color: var(--bg-light);
+                color: var(--text-light);
+                transition: var(--transition);
             }
-            h1 {
-                color: #e91e63;
+
+            body.dark {
+                background-color: var(--bg-dark);
+                color: var(--text-dark);
             }
-            p {
-                font-size: 18px;
+
+            header {
+                padding: 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                max-width: 1000px;
+                margin: auto;
             }
-            .btn {
-                background-color: #e91e63;
-                color: white;
-                padding: 10px 20px;
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav a {
+                margin-left: 1rem;
                 text-decoration: none;
-                border-radius: 5px;
-                font-size: 18px;
-                border: none;
+                color: inherit;
+                font-weight: 500;
+            }
+
+            .toggle-btn {
                 cursor: pointer;
-                margin: 10px;
+                padding: 0.5rem 1rem;
+                border: 1px solid currentColor;
+                background: none;
+                border-radius: 6px;
+                transition: var(--transition);
             }
-            .btn:hover {
-                background-color: #c2185b;
+
+            .hero {
+                padding: 5rem 2rem;
+                text-align: center;
             }
-            #content {
-                display: block;
+
+            .hero h2 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                color: gray;
+            }
+
+            section {
+                padding: 4rem 2rem;
+                max-width: 1000px;
+                margin: auto;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: var(--accent);
+            }
+
+            .skills,
+            .timeline,
+            .projects {
+                display: grid;
+                gap: 1.5rem;
+            }
+
+            .skill-bar {
+                background: #ccc;
+                border-radius: 10px;
+                overflow: hidden;
+                height: 10px;
+                position: relative;
+            }
+
+            .skill-fill {
+                background: var(--accent);
+                height: 100%;
+                width: 0%;
+                transition: width 2s ease;
+            }
+
+            .timeline-item {
+                border-left: 2px solid var(--accent);
+                padding-left: 1rem;
+                margin-left: 1rem;
+            }
+
+            .projects {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .card {
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 1rem;
+                transition: var(--transition);
+            }
+
+            .card:hover {
+                border-color: var(--accent);
+                transform: scale(1.02);
+            }
+
+            footer {
+                text-align: center;
+                padding: 2rem;
+                font-size: 0.9rem;
+                color: gray;
+            }
+
+            @media (max-width: 600px) {
+                header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                nav {
+                    margin-top: 1rem;
+                }
+
+                nav a {
+                    display: inline-block;
+                    margin: 0.5rem 0;
+                }
             }
         </style>
     </head>
     <body>
-        <div id="content">
-            <h1>Hai, Aku Punya Sesuatu Buat Kamu!</h1>
-            <p>Klik tombol di bawah ya :)</p>
-            <button class="btn" onclick="showConfess()">Klik di sini</button>
-        </div>
+        <header>
+            <h1>portofolio saya</h1>
+            <div>
+                <button class="toggle-btn" onclick="toggleDarkMode()">
+                    🌙
+                </button>
+            </div>
+        </header>
 
-        <div id="confess" style="display: none">
-            <h1> aku Suka Kamu ❤️</h1>
-            <p>Mau nggak jadi orang spesial buat aku?</p>
-            <button class="btn" onclick="showResult(true)">Ya</button>
-            <button class="btn" onclick="showResult(false)">Tidak</button>
-        </div>
+        <section class="hero">
+            <h2 id="typing"></h2>
+            <p>Web Developer | UI/UX Enthusiast</p>
+        </section>
 
-        <div id="yes" style="display: none">
-            <h1>YAY! ❤️</h1>
-            <p>Seneng banget! Terima kasih udah nerima aku!</p>
-        </div>
-
-        <div id="no" style="display: none">
-            <h1>:(</h1>
+        <section>
+            <h3>Tentang Saya</h3>
             <p>
-                Gapapa kok, yang penting aku udah jujur! Semoga kita tetap bisa
-                berteman ya!
+                saya adalah seorang pelajar SMA yang suka terhadap ilmu
+                teknologi dan saya juga sebagai web developer sekaligus seorang
+                cybersecurity specialist, dan saya juga seorang programmer yang
+                hanya menggunakan handphone android jadi tidak menggunakan
+                laptop atau pc
             </p>
-        </div>
+        </section>
+
+        <section>
+            <h3>Skill</h3>
+            <div class="skills">
+                <div>
+                    HTML,css,javascript
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-fill="90%"></div>
+                    </div>
+                </div>
+                <div>
+                    python
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-fill="85%"></div>
+                    </div>
+                </div>
+                <div>
+                    cybersecurity
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-fill="80%"></div>
+                    </div>
+                </div>
+                <div>
+                    c++
+                    <div class="skill-bar">
+                        <div class="skill-fill" data-fill="70%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Pengalaman</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <strong>2024 - Sekarang</strong><br />
+                    cybersecurity specialist
+                </div>
+                <div class="timeline-item">
+                    <strong>2023</strong><br />
+                    frontend Developer
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Proyek Unggulan</h3>
+            <div class="projects">
+                <div class="card">
+                    <strong>dDos defenders berbasis python</strong><br />
+                    sebuah script untuk mengcounter device dari dDos atau
+                    mallware dan ransomware
+                </div>
+                <div class="card">
+                    <strong>portofolio for UMKM</strong><br />
+                    Sebuah tempat di mana para UMKM bisa mempromosikan usaha
+                    pribadinya
+                </div>
+                <div class="card">
+                    <strong>hacking script berbasis termux</strong><br />
+                    berbagai script etical hacking yang dibuat untuk termux
+                    bahkan juga untuk linux
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>Kontak</h3>
+            <p>Email: miraclemandey6@gmail.com</p>
+            <p>GitHub: https://github.com/Matthewmandey</p>
+            <p>Instagram: @matthew.mandey</p>
+            <p>Instagram: @matthew.mandey</p>
+        </section>
+
+        <footer>
+            &copy; 2025 Nama Kamu. Dibuat dengan HTML, CSS, dan JavaScript.
+        </footer>
 
         <script>
-            function showConfess() {
-                document.getElementById("content").style.display = "none";
-                document.getElementById("confess").style.display = "block";
-            }
-
-            function showResult(accepted) {
-                document.getElementById("confess").style.display = "none";
-                if (accepted) {
-                    document.getElementById("yes").style.display = "block";
-                } else {
-                    document.getElementById("no").style.display = "block";
+            // Typing effect
+            const typingText = "Halo, saya MIRACLE MANDEY.";
+            const typingTarget = document.getElementById("typing");
+            let i = 0;
+            function typing() {
+                if (i < typingText.length) {
+                    typingTarget.textContent += typingText.charAt(i);
+                    i++;
+                    setTimeout(typing, 80);
                 }
             }
+            typing();
 
-            // Tombol "Tidak" pindah posisi tiap mau disentuh
-            const noBtn = document.querySelector(
-                'button[onclick="showResult(false)"]'
-            );
-            noBtn.addEventListener("mouseover", () => {
-                const randX = Math.floor(
-                    Math.random() * (window.innerWidth - 100)
-                );
-                const randY = Math.floor(
-                    Math.random() * (window.innerHeight - 50)
-                );
-                noBtn.style.position = "absolute";
-                noBtn.style.left = `${randX}px`;
-                noBtn.style.top = `${randY}px`;
+            // Dark mode toggle
+            function toggleDarkMode() {
+                document.body.classList.toggle("dark");
+            }
+
+            // Skill bar animation
+            window.addEventListener("load", () => {
+                document.querySelectorAll(".skill-fill").forEach(bar => {
+                    const width = bar.getAttribute("data-fill");
+                    bar.style.width = width;
+                });
             });
         </script>
     </body>
